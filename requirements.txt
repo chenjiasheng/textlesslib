@@ -3,9 +3,9 @@ torchaudio
 pytest
 AMFM_decompy
 librosa
-threadpoolctl==3.0.0
-numpy==1.22.0
-numba==0.53.0
+threadpoolctl>=3.0.0
+numpy>=1.22.0
+numba>=0.53.0
 joblib
 scikit-learn
 npy-append-array
