@@ -6,7 +6,8 @@
 from typing import Union
 
 from dataclasses import dataclass
-from torchaudio.datasets.utils import download_url
+import os
+from torchaudio.utils import download_asset
 import pathlib
 
 
@@ -33,12 +34,10 @@ class CheckpointManager:
 
     def download_by_name(self, name: str) -> None:
         checkpoint = self.storage[name]
-        download_url(
-            checkpoint.remote_path,
-            self.disk_root,
-            hash_value=checkpoint.sha256,
-            hash_type="sha256",
-            filename=checkpoint.fname,
+        download_asset(
+            key=checkpoint.remote_path,
+            path=pathlib.Path(os.path.join(self.disk_root, checkpoint.fname)),
+            hash=checkpoint.sha256,
         )
 
     def get_by_name(self, name: str, download_if_needed: bool = True) -> pathlib.Path:
